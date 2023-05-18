@@ -53,7 +53,6 @@ ol {
   top: 0;
   left: 0;
   position: sticky;
-  z-index: 1100;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,7 +85,7 @@ ol {
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
+  background-image: url('https://img.icons8.com/?size=512&id=OzwLkqfAdv0W&format=png');
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
@@ -179,7 +178,6 @@ ol {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1200;
 }
 
 .Modal {

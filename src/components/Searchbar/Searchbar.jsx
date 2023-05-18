@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Notiflix from 'notiflix';
 
 export class Searchbar extends Component {
   state = {
@@ -11,6 +12,9 @@ export class Searchbar extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    if (!this.state.value) {
+      return Notiflix.Notify.info('Enter something')
+    }
     this.props.onSubmit(this.state.value)
     this.setState({value: ''})
   };

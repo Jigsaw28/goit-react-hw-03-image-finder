@@ -5,6 +5,7 @@ import { imagesApi } from 'api/imagesApi';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
+import { Modal } from './Modal/Modal';
 
 export class App extends Component {
   state = {
@@ -12,6 +13,8 @@ export class App extends Component {
     hits: [],
     isLoading: false,
     page: 1,
+    showModal: false,
+    modalImageUrl: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -38,6 +41,17 @@ export class App extends Component {
     }
   }
 
+  toggleModal = (modalImageUrl) => {
+    this.setState(({ showModal }) => ({
+      modalImageUrl,
+      showModal: !showModal,
+    }));
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
+
   handleLoad = () => {
     this.setState(prev => ({
       page: prev.page + 1,
@@ -49,12 +63,19 @@ export class App extends Component {
   };
 
   render() {
+    const {hits, isLoading, showModal, modalImageUrl} = this.state
     return (
       <div className="App">
+        {showModal && (
+          <Modal
+            openModal={modalImageUrl}
+            closeModal={this.closeModal}
+          />
+        )}
         <Searchbar onSubmit={this.handleSearch} />
-        <ImageGallery hits={this.state.hits} />
-        <Loader visible={this.state.isLoading} />
-        {this.state.hits.length > 0 && !this.state.isLoading && (
+        <ImageGallery hits={hits} showModal={this.toggleModal} />
+        <Loader visible={isLoading} />
+        {hits.length > 0 && !isLoading && (
           <Button onClick={this.handleLoad} />
         )}
       </div>
